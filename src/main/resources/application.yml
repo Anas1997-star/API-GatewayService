@@ -1,0 +1,29 @@
+server:
+  port: 8035
+  
+spring:
+  application: 
+    name: CLOUD-GATEWAY 
+  cloud:
+    gateway:
+      routes:
+      - id: Customer-service
+        uri: http://localhost:8023/customer/
+        predicates:
+        - Path=/customer/**
+        
+      - id: Billing-service
+        uri: http://localhost:8022/billing/
+        predicates:
+        - Path=/billing/**
+       
+
+Eureka:
+  client:
+    register-with-eureka: true
+    fetch-registery: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      hostname: localhost      
+            
